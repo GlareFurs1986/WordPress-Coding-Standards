@@ -1,7 +1,7 @@
-<documentation title="Flag returning high or infinite posts_per_page.">
+<documentation title="High Posts Per Page Limit">
     <standard>
     <![CDATA[
-Using posts_per_page (or numberposts) with the value set to an unreasonably high number or setting nopaging to true opens up the potential for scaling issues if the query ends up querying thousands of posts.
+Using "posts_per_page" or "numberposts" with the value set to an high number opens up the potential for making requests slow if the query ends up querying thousands of posts. The default limit of 100 is configurable.
 
 You should always fetch the lowest number possible that still gives you the number of results you find acceptable.
     ]]>
@@ -11,21 +11,28 @@ You should always fetch the lowest number possible that still gives you the numb
         <![CDATA[
 $args = array(
     'posts_per_page' => <em>-1</em>,
+);
+$args = array(
     'posts_per_page' => <em>100</em>,
+);
+$args = array(
     'posts_per_page' => <em>'10'</em>,
 );
 
 $query_args['posts_per_page'] = <em>100</em>;
-$query_args['posts_per_page'] = <em>'10'</em>;
+
+_query_posts( 'nopaging=1&posts_per_page=<em>50</em>' );
         ]]>
         </code>
         <code title="Invalid: posts_per_page is over limit (default 100).">
         <![CDATA[
 $args = array(
-    'posts_per_page' => <em>999</em>,
+    'posts_per_page' => <em>101</em>,
 );
 
-_query_posts( 'nopaging=1&posts_per_page=999' );
+$query_args['posts_per_page'] = <em>200</em>;
+
+_query_posts( 'nopaging=1&posts_per_page=<em>999</em>' );
         ]]>
         </code>
     </code_comparison>
@@ -33,21 +40,29 @@ _query_posts( 'nopaging=1&posts_per_page=999' );
         <code title="Valid: numberposts is not over limit (default 100).">
         <![CDATA[
 $args = array(
-    'numberposts' => -1,
-    'numberposts' => 100,
-    'numberposts' => '10',
+    'numberposts' => <em>-1</em>,
+);
+$args = array(
+    'numberposts' => <em>100</em>,
+);
+$args = array(
+    'numberposts' => <em>'10'</em>,
 );
 
-$query_args['numberposts'] = '-1';
+$query_args['numberposts'] = <em>'-1'<em>;
+
+_query_posts( 'numberposts=<em>50</em>' );
         ]]>
         </code>
         <code title="Invalid: numberposts is over limit (default 100).">
         <![CDATA[
 $args = array(
-    'numberposts' => 999,
+    'numberposts' => <em>101</em>,
 );
 
-_query_posts( 'numberposts=999' );
+$query_args['numberposts'] = <em>'200'</em>;
+
+_query_posts( 'numberposts=<em>999</em>' );
         ]]>
         </code>
     </code_comparison>
