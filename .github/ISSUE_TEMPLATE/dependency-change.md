@@ -1,6 +1,9 @@
 ---
 name: Dependency Change
 about: A reminder to take action when a WPCS dependency changes
+title: ''
+labels: ''
+assignees: ''
 
 ---
 
